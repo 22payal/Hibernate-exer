@@ -7,7 +7,7 @@ import java.util.*;
 @Table(name = "Author")
 public class Author
    {
-       @Id
+       @Id @Column(name = "AUTHOR_ID")
     int auth_id ;
        @Column(name = "NAME")
     String firstname;
@@ -20,14 +20,18 @@ public class Author
        @Temporal(TemporalType.DATE)
        @Column(name = "DATE_OF_BIRTH")
     Date dob;
-
+//
 //       @OneToOne
-//       @JoinColumn(name = "Book")
 //       Book book;
+//
+//      @ManyToMany
+//       List <Book> book1= new ArrayList<>();
 
-      @ManyToMany
-       List <Book> book1= new ArrayList<>();
+//         @OneToMany (cascade = CascadeType.PERSIST)
+//         List <Book> books = new ArrayList<>();
 
+       @OneToMany (mappedBy = "author1")
+       List <Book> books = new ArrayList<>();
 
        @Embedded
        address address1;
@@ -35,12 +39,30 @@ public class Author
        @ElementCollection
        List<String> subject=new ArrayList<>();
 
-       public List<Book> getBook1() {
-           return book1;
+//
+//       public Book getBook() {
+//           return book;
+//       }
+//
+//       public void setBook(Book book) {
+//           this.book = book;
+//       }
+
+       //       public List<Book> getBook1() {
+//           return book1;
+//       }
+//
+//       public void setBook1(List<Book> book1) {
+//           this.book1 = book1;
+//       }
+
+
+       public void setBooks(List<Book> books) {
+           this.books = books;
        }
 
-       public void setBook1(List<Book> book1) {
-           this.book1 = book1;
+       public List<Book> getBooks() {
+           return books;
        }
 
        public void setSubject(List<String> subject) {
@@ -73,6 +95,7 @@ public class Author
 
     }
 
+
        public void setAddress1(address address1) {
            this.address1 = address1;
        }
@@ -100,13 +123,36 @@ public class Author
        public void setLastname(String lastname) {
            this.lastname = lastname;
        }
+
+//  Many to many mapping
 //
-//       public void setBook(Book book) {
-//           this.book = book;
+//       @Override
+//       public String toString() {
+//           return "Author{" +
+//                   "auth_id=" + auth_id +
+//                   ", firstname='" + firstname + '\'' +
+//                   ", lastname='" + lastname + '\'' +
+//                   ", age1=" + age1 +
+//                   ", dob=" + dob +
+//                   ", book1=" + book1 +
+//                   ", address1=" + address1 +
+//                   ", subject=" + subject +
+//                   '}';
 //       }
-//
-//       public Book getBook() {
-//           return book;
+
+//                      one to one mapping
+//       @Override
+//       public String toString() {
+//           return "Author{" +
+//                   "auth_id=" + auth_id +
+//                   ", firstname='" + firstname + '\'' +
+//                   ", lastname='" + lastname + '\'' +
+//                   ", age1=" + age1 +
+//                   ", dob=" + dob +
+//                   ", book=" + book +
+//                   ", address1=" + address1 +
+//                   ", subject=" + subject +
+//                   '}';
 //       }
 
 
@@ -118,7 +164,7 @@ public class Author
                    ", lastname='" + lastname + '\'' +
                    ", age1=" + age1 +
                    ", dob=" + dob +
-                   ", book1=" + book1 +
+                   ", books=" + books +
                    ", address1=" + address1 +
                    ", subject=" + subject +
                    '}';

@@ -7,19 +7,30 @@ import java.util.List;
 @Entity
 @Table(name = "Book")
 public class Book {
-    @Id @GeneratedValue(strategy =GenerationType.TABLE)
+    @Id  @Column(name = "ID")
     int book_id;
 
     String BookName;
+//
+//    @ManyToMany
+//    List <Author> author1= new ArrayList<>();
+//
+//    public void setAuthor1(List<Author> author1) {
+//        this.author1 = author1;
+//    }
+//
+//    public List<Author> getAuthor1() {
+//        return author1;
+//    }
 
-    @ManyToMany
-    List <Author> author1= new ArrayList<>();
+    @ManyToOne
+    Author author1;
 
-    public void setAuthor1(List<Author> author1) {
+    public void setAuthor1(Author author1) {
         this.author1 = author1;
     }
 
-    public List<Author> getAuthor1() {
+    public Author getAuthor1() {
         return author1;
     }
 
@@ -38,6 +49,25 @@ public class Book {
     public String getBookName() {
         return BookName;
     }
+//
+//    @Override
+//    public String toString() {
+//        return "Book{" +
+//                "book_id=" + book_id +
+//                ", BookName='" + BookName + '\'' +
+//                ", author1=" + author1 +
+//                '}';
+//    }
+
+//
+//    @Override
+//    public String toString() {
+//        return "Book{" +
+//                "book_id=" + book_id +
+//                ", BookName='" + BookName + '\'' +
+//                '}';
+//    }
+
 
     @Override
     public String toString() {
